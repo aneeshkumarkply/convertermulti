@@ -1,0 +1,70 @@
+name: converterpro
+description: Unit and currencies converter
+
+version: 3.1.2+34
+
+environment:
+  sdk: ">=2.15.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #Needed to store the customizations and the latest currencies convertions
+  shared_preferences: ^2.0.13
+  #Needed to open external pages such as GitHub repo, Play Store, etc
+  url_launcher: ^6.0.20
+  #Needed to download the latest currencies convertions
+  http: ^0.13.4
+  #Needed to improve the state management
+  provider: ^6.0.2
+  #Needed for translation
+  intl: ^0.17.0
+  #Needed for fonts
+  google_fonts: ^2.3.1
+  #Needed for navigation between pages
+  go_router: ^3.0.6
+  #Needed for Android App Shortcuts
+  quick_actions: ^0.6.0+10
+  #Needed for unit conversion
+  units_converter: ^1.1.1
+    #git:
+    #  url: https://github.com/ferraridamiano/units_converter
+    #path: ../units_converter
+
+  flutter_localizations:
+      sdk: flutter
+
+dev_dependencies:
+  test: ^1.17.12
+  flutter_native_splash: ^1.2.3
+  flutter_lints: ^1.0.4
+  msix: ^3.4.1
+  flutter_test:
+    sdk: flutter
+
+flutter_native_splash:
+  # Customize the parameters below, and run the following command in the terminal:
+  # flutter pub run flutter_native_splash:create
+  # To restore Flutter's default white splash screen, run the following command in the terminal:
+  # flutter pub run flutter_native_splash:remove
+
+  color: "#eeeeee"
+  color_dark: "#333333"
+  image: resources/splash/splash.png
+
+msix_config:
+  display_name: Converter Multi
+  publisher_display_name: Damiano Ferrari
+  identity_name: 39826DamianoFerrari.convertermulti
+  logo_path: resources\images\logo.png
+  output_name: convertermulti-windows
+  publisher: CN=E8FE6044-F04C-422E-AC68-EDA83F6AAFB2
+  capabilities: internetClient
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+        - resources/images/

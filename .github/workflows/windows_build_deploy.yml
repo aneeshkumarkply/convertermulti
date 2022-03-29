@@ -1,0 +1,38 @@
+name: "Windows: build & deploy"
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  test:
+    name: Windows build
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2.3.0
+      with:
+        channel: stable
+        cache: true
+
+    - name: Flutter doctor
+      run: flutter doctor
+
+    - name: Download pub dependencies
+      run: flutter pub get
+
+    - name: Build and create the .msix installer
+      run: flutter pub run msix:create --store
+
+    - name: Release to GitHub
+      uses: ncipollo/release-action@v1.9.0
+      with:
+        artifacts: "build/windows/runner/Release/convertermulti-windows.msix"
+        token: ${{ secrets.GH_TOKEN }}
+        tag: ${{ steps.version.outputs.content }}
+        commit: ${{ github.sha }}
+        allowUpdates: true     #so if you rerun a job it will overwrite the existing files

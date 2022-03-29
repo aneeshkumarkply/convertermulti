@@ -1,0 +1,32 @@
+name: convertermulti
+version: 3.1.2
+summary: Unit and currencies converter
+description: A Unit and Currencies Converter. Converter Multi is immediate, fast and easy to use!
+
+confinement: strict
+base: core18
+grade: stable
+
+architectures:
+  - build-on: amd64
+    run-on: [amd64, i386, arm64]
+
+slots:
+  dbus-convertermulti:
+    interface: dbus
+    bus: session
+    name: com.ferrarid.convertermulti
+    
+apps:
+  convertermulti:
+    command: convertermulti
+    extensions: [flutter-stable]
+    plugs:
+    - network
+    slots:
+      - dbus-convertermulti
+parts:
+  convertermulti:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart
